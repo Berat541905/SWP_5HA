@@ -1,76 +1,48 @@
 package refactorme;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Collection for geometry elements.
- *
- * Refactoring goals:
- * Fast and safe lookup by id.
- * Enforce unique ids at the moment of adding.
+ * This class stores and manages multiple geometry objects.
  */
-public class GeometryCollection<T extends Geometry> {
+public class GeometryCollection {
 
-    private final Map<Integer, T> byId = new HashMap<>();
-    private final List<T> elements = new ArrayList<>();
+    private List<Geometry> elements = new ArrayList<>();
 
     /**
-     * Adds an element.
-     *
-     * @throws DuplicateIdException when another element with the same id already exists
+     * Adds a new geometry to the list.
+     * Throws an exception if the id already exists.
      */
-    public void add(T element) throws DuplicateIdException {
-        if (element == null) {
-            throw new IllegalArgumentException("Element must not be null");
+    public void add(Geometry geometry) {
+        if (getById(geometry.getId()) != null) {
+            throw new DuplicateIdException("ID already exists: " + geometry.getId());
         }
-        int id = element.getId();
-        if (byId.containsKey(id)) {
-            throw new DuplicateIdException(id);
-        }
-        byId.put(id, element);
-        elements.add(element);
+        elements.add(geometry);
     }
 
     /**
-     * Removes an element by reference.
-     *
-     * @return true if it was removed
+     * Returns a geometry by its id.
+     * Returns null if not found.
      */
-    public boolean remove(T element) {
-        if (element == null) {
-            return false;
+    public Geometry getById(int id) {
+        for (Geometry g : elements) {
+            if (g.getId() == id) {
+                return g;
+            }
         }
-        T removed = byId.remove(element.getId());
-        if (removed == null) {
-            return false;
-        }
-        elements.remove(removed);
-        return true;
-    }
-
-    public boolean contains(T element) {
-        return element != null && byId.containsKey(element.getId());
+        return null;
     }
 
     /**
-     * Returns the element with the given id.
+     * Removes a geometry by id.
+     * Throws an exception if not found.
      */
-    public T getById(int id) throws GeometryNotFoundException {
-        T element = byId.get(id);
-        if (element == null) {
-            throw new GeometryNotFoundException(id);
+    public boolean removeById(int id) {
+        Geometry g = getById(id);
+        if (g == null) {
+            throw new GeometryNotFoundException("No geometry with id: " + id);
         }
-        return element;
-    }
-
-    /**
-     * @return unmodifiable view of the internal list, useful for printing or sorting
-     */
-    public List<T> asList() {
-        return Collections.unmodifiableList(elements);
+        return elements.remove(g);
     }
 }

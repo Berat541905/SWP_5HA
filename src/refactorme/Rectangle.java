@@ -1,44 +1,40 @@
 package refactorme;
 
 /**
- * Rectangle with width and height.
+ * This class represents a rectangle.
  */
 public class Rectangle extends Geometry {
 
-    private final double width;
-    private final double height;
+    protected double width;
+    protected double height;
 
     /**
-     * Creates a rectangle.
-     *
-     * Changes:
-     * Invalid values now throw an exception instead of printing a message and continuing.
-     * This makes errors visible and testable.
+     * Creates a rectangle with width and height.
      */
-    public Rectangle(int id, double width, double height, boolean filled, String color) {
+    public Rectangle(int id, boolean filled, String color, double width, double height) {
         super(id, filled, color);
+
         if (width <= 0 || height <= 0) {
-            throw new IllegalArgumentException("Width and height must be greater than 0");
+            throw new IllegalArgumentException("Breite und Höhe müssen größer als 0 sein");
         }
+
         this.width = width;
         this.height = height;
     }
 
-    public double getWidth() {
-        return width;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
+    /**
+     * Calculates the area of the rectangle.
+     */
     @Override
     public double calculateArea() {
         return width * height;
     }
 
+    /**
+     * Calculates the perimeter of the rectangle.
+     */
     @Override
-    public double getPerimeter() {
+    public double calculatePerimeter() {
         return 2 * (width + height);
     }
 }

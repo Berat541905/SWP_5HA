@@ -1,12 +1,10 @@
 package refactorme;
 
 /**
- * Thrown when a geometry element cannot be found by id.
+ * This exception is thrown when a geometry is not found.
  */
-public class GeometryNotFoundException extends Exception {
-    private static final long serialVersionUID = 1L;
-
-    public GeometryNotFoundException(int id) {
-        super("No such element with id: " + id);
+public class GeometryNotFoundException extends RuntimeException {
+    public GeometryNotFoundException(String message) {
+        super(message);
     }
 }

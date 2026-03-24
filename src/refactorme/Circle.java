@@ -1,42 +1,38 @@
 package refactorme;
 
 /**
- * Circle described by its radius.
+ * This class represents a circle.
  */
 public class Circle extends Geometry {
 
-    private final double radius;
+    private double radius;
 
     /**
-     * Creates a circle.
-     *
-     * Changes:
-     * Removed duplicated fields id, filled and color because they are already in {@link Geometry}.
-     * Radius is immutable here to keep the object stable after it was added to a collection.
+     * Creates a circle with a given radius.
      */
-    public Circle(int id, double radius, boolean filled, String color) {
+    public Circle(int id, boolean filled, String color, double radius) {
         super(id, filled, color);
+
         if (radius <= 0) {
-            throw new IllegalArgumentException("Radius must be greater than 0");
+            throw new IllegalArgumentException("Radius muss größer als 0 sein");
         }
+
         this.radius = radius;
     }
 
-    public double getRadius() {
-        return radius;
-    }
-
-    public double getDiameter() {
-        return 2 * radius;
-    }
-
+    /**
+     * Calculates the area of the circle.
+     */
     @Override
     public double calculateArea() {
         return Math.PI * radius * radius;
     }
 
+    /**
+     * Calculates the perimeter of the circle.
+     */
     @Override
-    public double getPerimeter() {
+    public double calculatePerimeter() {
         return 2 * Math.PI * radius;
     }
 }
