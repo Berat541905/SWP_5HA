@@ -13,11 +13,9 @@ public class Rectangle extends Geometry {
      */
     public Rectangle(int id, boolean filled, String color, double width, double height) {
         super(id, filled, color);
-
         if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException("Breite und Höhe müssen größer als 0 sein");
         }
-
         this.width = width;
         this.height = height;
     }

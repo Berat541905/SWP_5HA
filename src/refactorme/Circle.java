@@ -12,11 +12,9 @@ public class Circle extends Geometry {
      */
     public Circle(int id, boolean filled, String color, double radius) {
         super(id, filled, color);
-
         if (radius <= 0) {
             throw new IllegalArgumentException("Radius muss größer als 0 sein");
         }
-
         this.radius = radius;
     }
 
