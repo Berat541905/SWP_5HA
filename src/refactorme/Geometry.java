@@ -34,5 +34,5 @@ public abstract class Geometry {
     /**
      * Calculates the perimeter of the shape.
      */
-    public abstract double calculatePerimeter();
+    public abstract double calculatePeripherie();
 }

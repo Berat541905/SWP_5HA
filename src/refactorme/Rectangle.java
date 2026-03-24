@@ -32,7 +32,7 @@ public class Rectangle extends Geometry {
      * Calculates the perimeter of the rectangle.
      */
     @Override
-    public double calculatePerimeter() {
+    public double calculatePeripherie() {
         return 2 * (width + height);
     }
 }

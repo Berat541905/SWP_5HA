@@ -30,7 +30,7 @@ public class Circle extends Geometry {
      * Calculates the perimeter of the circle.
      */
     @Override
-    public double calculatePerimeter() {
+    public double calculatePeripherie() {
         return 2 * Math.PI * radius;
     }
 }
